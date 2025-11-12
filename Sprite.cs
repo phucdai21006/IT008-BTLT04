@@ -11,6 +11,11 @@ public class Sprite
     private const int FrameTime = 100; // ms
     private long lastFrameTime = 0;
     
+    public float X { get; set; }
+    public float Y { get; set; }
+    public float SpeedX { get; set; }
+    public float SpeedY { get; set; }
+    
     public Sprite(
         string filePath, 
         int frameWidth, 
@@ -39,13 +44,16 @@ public class Sprite
         
         currentFrame = (currentFrame + 1) % frameCount;
         lastFrameTime = now;
+        
+        // Move sprite
+        X += SpeedX;
+        Y += SpeedY;
     }
 
-    // Draw sprite at position (x, y)
-    public void Draw(Graphics g, int x, int y)
+    public void Draw(Graphics g)
     {
         var srcRect = new Rectangle(currentFrame * frameWidth, 0, frameWidth, frameHeight);
-        var destRect = new Rectangle(x, y, frameWidth, frameHeight);
+        var destRect = new Rectangle((int)X, (int)Y, frameWidth, frameHeight);
 
         g.DrawImage(spriteSheet, destRect, srcRect.X, srcRect.Y, srcRect.Width, srcRect.Height, GraphicsUnit.Pixel, attr);
     }
