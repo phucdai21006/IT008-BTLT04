@@ -6,21 +6,21 @@ public class Sprite
 {
     private readonly Image spriteSheet;
     private readonly ImageAttributes attr;
-    private readonly int frameWidth, frameHeight, frameCount;
+    public readonly int frameWidth, frameHeight, frameCount;
     private int currentFrame = 0;
     private const int FrameTime = 100; // ms
     private long lastFrameTime = 0;
-    
+
     public float X { get; set; }
     public float Y { get; set; }
     public float SpeedX { get; set; }
     public float SpeedY { get; set; }
-    
+
     public Sprite(
-        string filePath, 
-        int frameWidth, 
-        int frameHeight, 
-        int frameCount, 
+        string filePath,
+        int frameWidth,
+        int frameHeight,
+        int frameCount,
         Color? transparentColorFrom = null,
         Color? transparentColorTo = null)
     {
@@ -41,10 +41,10 @@ public class Sprite
     {
         var now = Environment.TickCount64;
         if (now - lastFrameTime < FrameTime) return;
-        
+
         currentFrame = (currentFrame + 1) % frameCount;
         lastFrameTime = now;
-        
+
         // Move sprite
         X += SpeedX;
         Y += SpeedY;
@@ -57,6 +57,5 @@ public class Sprite
 
         g.DrawImage(spriteSheet, destRect, srcRect.X, srcRect.Y, srcRect.Width, srcRect.Height, GraphicsUnit.Pixel, attr);
     }
-
     public void Dispose() => spriteSheet.Dispose();
 }

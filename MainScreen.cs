@@ -6,18 +6,25 @@ namespace BTLT04;
 
 public partial class MainScreen : Form
 {
-    private readonly Sprite player, fire, explosion, monster;
+    private readonly Sprite player, fire, explosion;
+    private readonly List<Sprite> monster = new();
     private readonly Timer timer;
     private const float MoveSpeed = 3;
     private bool keyUp;
     private bool keyDown;
-    
+    private readonly int[] lanes = { 20, 140, 260 }; //Hang quai spawn
+    private readonly Random rnd = new Random();
+    private int maxMonsters;
+    private int spawnCooldown = 0;
+
+
+
     public MainScreen()
     {
         InitializeComponent();
-
+        maxMonsters = rnd.Next(3, 11);
         DoubleBuffered = true;
-        
+
         // Khoi tao sprites
         // Chi duoc thay doi gia tri trong ngoac nhon (X, Y, SpeedX, SpeedY)
         // Di chuyen sprite bang cach thay doi SpeedX, SpeedY
@@ -34,57 +41,76 @@ public partial class MainScreen : Form
             X = 100,
             Y = this.Height-220-38,
         };
-        
+
         fire = new Sprite(
             "Resources/Images/fire.png",
             frameWidth: 64,
             frameHeight: 48,
             frameCount: 8,
-            transparentColorFrom: Color.White, 
+            transparentColorFrom: Color.White,
             transparentColorTo: Color.White
         )
         {
             // Fixed speed, move right
             SpeedX = 2
         };
-        
+
         explosion = new Sprite(
             "Resources/Images/explosion.png",
             frameWidth: 32,
             frameHeight: 32,
             frameCount: 12,
-            transparentColorFrom: Color.FromArgb(0, 248, 0), 
+            transparentColorFrom: Color.FromArgb(0, 248, 0),
             transparentColorTo: Color.FromArgb(6, 248, 6)
         );
-        
-        monster = new Sprite(
-            "Resources/Images/monster.jpg",
-            frameWidth: 170,
-            frameHeight: 145,
-            frameCount: 6,
-            transparentColorFrom: Color.FromArgb(70, 110, 150), 
-            transparentColorTo: Color.FromArgb(140, 180, 255)
-        )
-        {
-            // Fixed speed, move left
-            SpeedX = -1.5f,
-        };
-        
+
+
         // Sprite animation timer
         timer = new Timer();
-        timer.Interval = 16; // ~60 FPS
+        timer.Interval = 14; // ~60 FPS
         timer.Tick += (s, e) =>
         {
             player.Update();
             fire.Update();
             explosion.Update();
-            monster.Update();
+            spawnCooldown++;
+
+            if (spawnCooldown >= rnd.Next(70, 600))
+            {
+                spawnCooldown = 0;
+
+                if (monster.Count < maxMonsters)
+                {
+                    monster.Add(CreateMonster());
+                }
+            }
+            for (int i = monster.Count - 1; i >= 0; i--)
+            {
+                var m = monster[i];
+                m.Update();
+
+                //Khi quai cham nguoi choi
+                if (IsColliding(m, player))
+                {
+                    monster.RemoveAt(i);
+                    continue;
+                }
+                //Khi quai cham tuong
+                if (m.X + 170 < 0)
+                {
+                    m.X = this.ClientSize.Width + rnd.Next(0, 400);
+                    m.Y = lanes[rnd.Next(lanes.Length)];
+
+                    maxMonsters = rnd.Next(3, 11); //Tang do kho 
+                }
+            }
+
             Invalidate();
         };
         timer.Start();
         CreateBackGround();
     }
-    
+
     private void OnKeyDown(object sender, KeyEventArgs e)
     {
         switch (e.KeyCode)
@@ -119,20 +145,23 @@ public partial class MainScreen : Form
     {
         player.SpeedY = (keyDown ? MoveSpeed : 0) - (keyUp ? MoveSpeed : 0);
     }
-    
+
     protected override void OnPaint(PaintEventArgs e)
     {
         // Ve sprite o toa do (x, y)
+        foreach (var m in monster)
+            m.Draw(e.Graphics);
         player.Draw(e.Graphics);
     }
-    
+
     protected override void OnFormClosed(FormClosedEventArgs e)
     {
         // Copy toan bo function qua form game la duoc   
         player.Dispose();
         fire.Dispose();
         explosion.Dispose();
-        monster.Dispose();
+        foreach (var m in monster)
+            m.Dispose();
         base.OnFormClosed(e);
     }
 
@@ -209,4 +238,30 @@ public partial class MainScreen : Form
         gameOverScreen.Owner = this.Owner;
         this.Close();
     }
+    private Sprite CreateMonster()
+    {
+        var m = new Sprite(
+            "Resources/Images/monster.jpg",
+            170, 140, 6,
+            Color.FromArgb(70, 110, 150),
+            Color.FromArgb(140, 180, 255)
+        )
+        {
+            SpeedX = -(float)rnd.Next(2, 7) //Tang toc quai ngau nhien
+        };
+
+        m.X = this.ClientSize.Width + rnd.Next(0, 100);
+
+        m.Y = lanes[rnd.Next(lanes.Length)];
+
+        return m;
+    }
+    private bool IsColliding(Sprite a, Sprite b)
+    {
+        float dx = (a.X + a.frameWidth / 2) - (b.X + b.frameWidth / 2);
+        float dy = (a.Y + a.frameHeight / 2) - (b.Y + b.frameHeight / 2);
+
+        return Math.Abs(dx) < 50 && Math.Abs(dy) < 50;
+    }
+
 }
