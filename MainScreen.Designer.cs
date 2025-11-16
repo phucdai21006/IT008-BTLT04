@@ -24,8 +24,8 @@ partial class MainScreen
     #region Windows Form Designer generated code
 
     /// <summary>
-    ///  Required method for Designer support - do not modify
-    ///  the contents of this method with the code editor.
+    /// Required method for Designer support - do not modify
+    /// the contents of this method with the code editor.
     /// </summary>
     private void InitializeComponent()
     {
@@ -39,10 +39,10 @@ partial class MainScreen
         TimeBox.Font = new Font("Sesame", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
         TimeBox.Location = new Point(1050, 19);
         TimeBox.Name = "TimeBox";
-        TimeBox.Size = new Size(200, 35);
+        TimeBox.Size = new System.Drawing.Size(200, 35);
         TimeBox.TabIndex = 1;
         TimeBox.Text = "Time:";
-        TimeBox.TextAlign = ContentAlignment.MiddleLeft;
+        TimeBox.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
         // 
         // Score
         // 
@@ -50,10 +50,10 @@ partial class MainScreen
         Score.Font = new Font("Sesame", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
         Score.Location = new Point(1050, 71);
         Score.Name = "Score";
-        Score.Size = new Size(200, 35);
+        Score.Size = new System.Drawing.Size(200, 35);
         Score.TabIndex = 2;
         Score.Text = "SCORE:";
-        Score.TextAlign = ContentAlignment.MiddleLeft;
+        Score.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
         // 
         // MainScreen
         // 

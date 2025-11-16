@@ -28,70 +28,70 @@
         /// </summary>
         private void InitializeComponent()
         {
-            RestartButton = new Button();
-            BackStartScreenButton = new Button();
-            TimePlayBox = new Label();
-            ScoreBox = new Label();
+            RestartButton = new System.Windows.Forms.Button();
+            BackStartScreenButton = new System.Windows.Forms.Button();
+            TimePlayBox = new System.Windows.Forms.Label();
+            ScoreBox = new System.Windows.Forms.Label();
             SuspendLayout();
             // 
             // RestartButton
             // 
-            RestartButton.BackColor = Color.FromArgb(255, 255, 128);
-            RestartButton.Font = new Font("Sesame", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            RestartButton.Location = new Point(169, 270);
+            RestartButton.BackColor = System.Drawing.Color.FromArgb(((int)((byte)255)), ((int)((byte)255)), ((int)((byte)128)));
+            RestartButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)0));
+            RestartButton.Location = new System.Drawing.Point(169, 270);
             RestartButton.Name = "RestartButton";
-            RestartButton.Size = new Size(200, 70);
+            RestartButton.Size = new System.Drawing.Size(200, 70);
             RestartButton.TabIndex = 0;
             RestartButton.Text = "Restart";
             RestartButton.UseVisualStyleBackColor = false;
             // 
             // BackStartScreenButton
             // 
-            BackStartScreenButton.BackColor = Color.FromArgb(255, 255, 128);
-            BackStartScreenButton.Font = new Font("Sesame", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            BackStartScreenButton.Location = new Point(435, 270);
+            BackStartScreenButton.BackColor = System.Drawing.Color.FromArgb(((int)((byte)255)), ((int)((byte)255)), ((int)((byte)128)));
+            BackStartScreenButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)0));
+            BackStartScreenButton.Location = new System.Drawing.Point(435, 270);
             BackStartScreenButton.Name = "BackStartScreenButton";
-            BackStartScreenButton.Size = new Size(200, 70);
+            BackStartScreenButton.Size = new System.Drawing.Size(200, 70);
             BackStartScreenButton.TabIndex = 1;
             BackStartScreenButton.Text = "Start Screen";
             BackStartScreenButton.UseVisualStyleBackColor = false;
             // 
             // TimePlayBox
             // 
-            TimePlayBox.BackColor = Color.Transparent;
-            TimePlayBox.Font = new Font("Sesame", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            TimePlayBox.ForeColor = Color.FromArgb(255, 192, 128);
-            TimePlayBox.Location = new Point(169, 363);
+            TimePlayBox.BackColor = System.Drawing.Color.Transparent;
+            TimePlayBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)0));
+            TimePlayBox.ForeColor = System.Drawing.Color.FromArgb(((int)((byte)255)), ((int)((byte)192)), ((int)((byte)128)));
+            TimePlayBox.Location = new System.Drawing.Point(169, 363);
             TimePlayBox.Name = "TimePlayBox";
-            TimePlayBox.Size = new Size(200, 30);
+            TimePlayBox.Size = new System.Drawing.Size(200, 30);
             TimePlayBox.TabIndex = 2;
             TimePlayBox.Text = "TimePlay:";
-            TimePlayBox.TextAlign = ContentAlignment.MiddleLeft;
+            TimePlayBox.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // ScoreBox
             // 
-            ScoreBox.BackColor = Color.Transparent;
-            ScoreBox.Font = new Font("Sesame", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            ScoreBox.ForeColor = Color.FromArgb(255, 192, 128);
-            ScoreBox.Location = new Point(436, 360);
+            ScoreBox.BackColor = System.Drawing.Color.Transparent;
+            ScoreBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)0));
+            ScoreBox.ForeColor = System.Drawing.Color.FromArgb(((int)((byte)255)), ((int)((byte)192)), ((int)((byte)128)));
+            ScoreBox.Location = new System.Drawing.Point(436, 360);
             ScoreBox.Name = "ScoreBox";
-            ScoreBox.Size = new Size(200, 30);
+            ScoreBox.Size = new System.Drawing.Size(200, 30);
             ScoreBox.TabIndex = 3;
             ScoreBox.Text = "SCORE:";
-            ScoreBox.TextAlign = ContentAlignment.MiddleLeft;
+            ScoreBox.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // GameOverScreen
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
-            BackgroundImage = Properties.Resources.GameOver;
-            BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(800, 450);
+            AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            BackgroundImage = global::BTLT04.Properties.Resources.GameOver;
+            BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            ClientSize = new System.Drawing.Size(800, 450);
             Controls.Add(ScoreBox);
             Controls.Add(TimePlayBox);
             Controls.Add(BackStartScreenButton);
             Controls.Add(RestartButton);
-            Name = "GameOverScreen";
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "GameOverScreen";
             ResumeLayout(false);
         }
