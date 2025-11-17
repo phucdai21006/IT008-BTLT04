@@ -178,10 +178,10 @@ public partial class MainScreen : Form
 
     private void CreateBackGround()
     {
-        PlaySoundOfMainScreen();
-        TimeCount.Interval = 1000;
-        TimeCount.Tick += TimeCount_Tick;
-        TimeCount.Start();
+        soundMainScreen.PlayLooping();
+        timeCount.Interval = 1000;
+        timeCount.Tick += TimeCount_Tick;
+        timeCount.Start();
         //GameOver();
         //KHOA GAMEOVER() KHI CAN TEST NHAN VAT
     }
